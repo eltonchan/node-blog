@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <title>注册</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="jim世界，分享知识。">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.css"/>
+    <link rel='stylesheet' href='/css/style.css' />
+</head>
+<body>
+
+<video id="video_background" preload="auto" autoplay="autoplay" loop="loop" style="position: fixed; top: -203px; left: 0px; bottom: 0px; right: 0px; z-index: -100; width: 100%; height: auto;"><source src="https://s3-eu-west-1.amazonaws.com/wiffinity-cdn/people.mp4" type="video/mp4"><source src="https://s3-eu-west-1.amazonaws.com/wiffinity-cdn/people.webm" type="video/webm">bgvideo</video>
+<div class="index-main-body" ng-controller="Login">
+    <div class="index-header">
+        <h1 class="">Jim</h1>
+        <h2 class="subtitle">与世界分享你的知识、经验和见解</h2>
+    </div>
+    <div class="desk-front sign-flow clearfix sign-flow-simple">
+        <div class="index-tab-navs">
+            <div class="navs-slider">
+                <a href="javascript:;" ng-class="{active:data.on==1}" ng-click="data.change(1)">注册</a>
+                <a href="javascript:;" ng-class="{active:data.on==2}" ng-click="data.change(2)">登录</a>
+                <span class="navs-slider-bar" ng-class="{active:data.on==2}"></span>
+            </div>
+        </div>
+        <div class="view view-signin" ng-class="{selected:data.on==2}">
+            <form name="form2" novalidate="novalidate" action="/login" method="post"  autocomplete="off">
+                <div class="group-inputs">
+                    <div class="name input-wrapper">
+                        <input required="" type="text" name="name" ng-model="data.name"  placeholder="姓名">
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="password" name="password"  ng-model="data.password"  placeholder="密码(6-20个字符)" required="">
+                    </div>
+                </div>
+                <div class="failure" id="summary">
+                    <ul>
+                        <li ng-show="form2.name.$dirty && form2.name.$error.required">用户名不得为空</li>
+                        <li ng-show="form2.password.$dirty && form2.password.$error.required">密码不得为空</li>
+                    </ul>
+                </div>
+                <div class="button-wrapper command">
+                    <button class="sign-button submit" ng-disabled="form2.$invalid" type="submit">登录</button>
+                </div>
+                <div class="signin-misc-wrapper clearfix">
+                    <label class="remember-me">
+                        <input type="checkbox" name="remember_me" checked="" value="true"> 记住我
+                    </label>
+                    <a class="unable-login" href="#">无法登录?</a>
+                </div>
+            </form>
+        </div>
+        <div class="view view-signup"  ng-class="{selected:data.on==1}">
+            <form name="form"   class="zu-side-login-box" action="/reg" method="post" id="sign-form-1" autocomplete="off" novalidate="novalidate">
+                <div class="group-inputs">
+                    <div class="name input-wrapper">
+                        <input required="" type="text" name="name" ng-model="data.name"  placeholder="姓名">
+                    </div>
+                    <div class="input-wrapper">
+                        <input required="" type="password" name="password" ng-maxlength="20" ng-minlength="6" ng-model="data.password"  placeholder="密码(6-20个字符)">
+                    </div>
+                </div>
+                <div class="failure" id="summary">
+                    <ul>
+                        <%if(typeof info !== 'undefined'){%>
+                            <li><%=info%></li>
+                        <%}%>
+                        <li ng-show="form.name.$dirty && form.name.$error.required">用户名不得为空</li>
+                        <li ng-show="form.password.$dirty && form.password.$error.required">密码不得为空</li>
+                        <li ng-show="form.password.$dirty && form.password.$error.maxlength">密码长度不能大于20个字符！</li>
+                        <li ng-show="form.password.$dirty && form.password.$error.minlength">密码长度不能小于6个字符！</li>
+                    </ul>
+                </div>
+                <div class="button-wrapper command">
+                    <button class="sign-button submit" ng-disabled="form.$invalid" type="submit">注册jim</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/angular.min.js"></script>
+<script src="/js/init.js"></script>
+</body>
+</html>
